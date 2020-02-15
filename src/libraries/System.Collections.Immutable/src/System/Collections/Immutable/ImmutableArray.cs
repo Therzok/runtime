@@ -363,7 +363,7 @@ namespace System.Collections.Immutable
         [Pure]
         public static ImmutableArray<T>.Builder CreateBuilder<T>()
         {
-            return Create<T>().ToBuilder();
+            return new ImmutableArray<T>.Builder();
         }
 
         /// <summary>
