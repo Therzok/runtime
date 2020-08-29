@@ -438,15 +438,10 @@ namespace Microsoft.XmlSerializer.Generator
 
         private static Assembly LoadAssembly(string assemblyName, bool throwOnFail)
         {
-            Assembly assembly = null;
             string path = Path.IsPathRooted(assemblyName) ? assemblyName : Path.GetFullPath(assemblyName);
-            assembly = Assembly.LoadFile(path);
-            if (assembly == null)
-            {
-                throw new InvalidOperationException(SR.Format(SR.ErrLoadAssembly, assemblyName));
-            }
 
-            return assembly;
+            return Assembly.LoadFile(path)
+                ?? throw new InvalidOperationException(SR.Format(SR.ErrLoadAssembly, assemblyName));
         }
 
         private void WriteHeader()
