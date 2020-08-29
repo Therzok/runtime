@@ -255,13 +255,10 @@ namespace Microsoft.XmlSerializer.Generator
 
                 try
                 {
-                    if (type != null)
+                    var obsoleteAttribute = type?.GetCustomAttribute<ObsoleteAttribute>(false);
+                    if (obsoleteAttribute.IsError)
                     {
-                        var obsoleteAttribute = type.GetCustomAttribute<ObsoleteAttribute>(false);
-                        if (obsoleteAttribute.IsError)
-                        {
-                            continue;
-                        }
+                        continue;
                     }
                 }
                 //Ignore the FileNotFoundException when call GetCustomAttributes e.g. if the type uses the attributes defined in a different assembly
