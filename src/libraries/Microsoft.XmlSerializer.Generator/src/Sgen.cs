@@ -530,27 +530,27 @@ namespace Microsoft.XmlSerializer.Generator
             {
                 foreach (var entry in s_references.Split(';'))
                 {
-                    string trimentry = entry.Trim();
-                    if (string.IsNullOrEmpty(trimentry))
+                    string reference = entry.Trim();
+                    if (string.IsNullOrEmpty(reference))
                         continue;
-                    referencelist.Add(trimentry);
+
+                    if (reference.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) || reference.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase))
+                        continue;
+
+                    referencelist.Add(reference);
                 }
             }
 
             foreach (var reference in referencelist)
             {
-                if (reference.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) || reference.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase))
+                if (File.Exists(reference))
                 {
-                    if (File.Exists(reference))
+                    string filename = Path.GetFileNameWithoutExtension(reference);
+                    if (!string.IsNullOrEmpty(filename))
                     {
-                        string filename = Path.GetFileNameWithoutExtension(reference);
-                        if (!string.IsNullOrEmpty(filename))
-                        {
-                            s_referencedic.Add(filename, reference);
-                        }
+                        s_referencedic.Add(filename, reference);
                     }
                 }
-
             }
         }
 
