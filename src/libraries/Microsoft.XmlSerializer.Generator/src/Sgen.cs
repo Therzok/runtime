@@ -519,7 +519,7 @@ namespace Microsoft.XmlSerializer.Generator
 
         private static string GetTempAssemblyName(AssemblyName parent, string ns)
         {
-            return parent.Name + ".XmlSerializers" + (ns == null || ns.Length == 0 ? "" : "." + ns.GetHashCode());
+            return parent.Name + ".XmlSerializers" + (string.IsNullOrEmpty(ns) ? "" : "." + ns.GetHashCode());
         }
 
         private static void ParseReferences()
