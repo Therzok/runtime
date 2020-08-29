@@ -539,7 +539,7 @@ namespace Microsoft.XmlSerializer.Generator
 
             foreach (var reference in referencelist)
             {
-                if (reference.EndsWith(".dll") || reference.EndsWith(".exe"))
+                if (reference.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) || reference.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase))
                 {
                     if (File.Exists(reference))
                     {
@@ -621,7 +621,7 @@ namespace Microsoft.XmlSerializer.Generator
             var parsedArgs = new List<string>();
             foreach (string arg in args)
             {
-                if (!arg.EndsWith(".rsp"))
+                if (!arg.EndsWith(".rsp", StringComparison.InvariantCultureIgnoreCase))
                 {
                     parsedArgs.Add(arg);
                 }
