@@ -240,10 +240,8 @@ namespace Microsoft.XmlSerializer.Generator
             var importedTypes = new List<Type>();
             var importer = new XmlReflectionImporter();
 
-            for (int i = 0; i < types.Length; i++)
+            foreach (var type in types)
             {
-                Type type = types[i];
-
                 try
                 {
                     var obsoleteAttribute = type?.GetCustomAttribute<ObsoleteAttribute>(false);
