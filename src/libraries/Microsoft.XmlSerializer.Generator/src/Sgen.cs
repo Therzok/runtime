@@ -525,25 +525,16 @@ namespace Microsoft.XmlSerializer.Generator
 
         private static void ParseReferences()
         {
-            var referencelist = new List<string>();
-            if (s_references.Length > 0)
+            foreach (var entry in s_references.Split(';'))
             {
-                foreach (var entry in s_references.Split(';'))
-                {
-                    string reference = entry.Trim();
-                    if (string.IsNullOrEmpty(reference))
-                        continue;
+                string reference = entry.Trim();
+                if (string.IsNullOrEmpty(reference))
+                    continue;
 
-                    bool isAssembly = reference.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) || reference.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase);
-                    if (!isAssembly)
-                        continue;
+                bool isAssembly = reference.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) || reference.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase);
+                if (!isAssembly)
+                    continue;
 
-                    referencelist.Add(reference);
-                }
-            }
-
-            foreach (var reference in referencelist)
-            {
                 if (File.Exists(reference))
                 {
                     string filename = Path.GetFileNameWithoutExtension(reference);
