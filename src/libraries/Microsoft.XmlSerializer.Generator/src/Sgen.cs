@@ -259,17 +259,8 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (type != null)
                     {
-                        bool isObsolete = false;
-                        foreach (ObsoleteAttribute attribute in type.GetCustomAttributes<ObsoleteAttribute>(false))
-                        {
-                            if (attribute.IsError)
-                            {
-                                isObsolete = true;
-                                break;
-                            }
-                        }
-
-                        if (isObsolete)
+                        var obsoleteAttribute = type.GetCustomAttribute<ObsoleteAttribute>(false);
+                        if (obsoleteAttribute.IsError)
                         {
                             continue;
                         }
@@ -381,7 +372,6 @@ namespace Microsoft.XmlSerializer.Generator
                 Console.Out.WriteLine(FormatMessage(parsableerrors, true, SR.Format(SR.InfoNoSerializableTypes, assembly.Location)));
             }
         }
-
 
         private bool ArgumentMatch(string arg, string formal)
         {
