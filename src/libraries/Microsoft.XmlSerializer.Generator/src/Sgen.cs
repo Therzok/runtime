@@ -85,10 +85,8 @@ namespace Microsoft.XmlSerializer.Generator
                         else
                         {
                             string[] typelist = args[i].Split(';');
-                            foreach (var type in typelist)
-                            {
-                                types.Add(type);
-                            }
+
+                            types.AddRange(typelist);
                         }
                     }
                     else if (ArgumentMatch(arg, "assembly") || ShortNameArgumentMatch(arg, "a"))
