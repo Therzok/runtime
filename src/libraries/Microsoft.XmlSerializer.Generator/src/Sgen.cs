@@ -247,7 +247,7 @@ namespace Microsoft.XmlSerializer.Generator
                 try
                 {
                     var obsoleteAttribute = type?.GetCustomAttribute<ObsoleteAttribute>(false);
-                    if (obsoleteAttribute.IsError)
+                    if (obsoleteAttribute != null && obsoleteAttribute.IsError)
                     {
                         continue;
                     }
