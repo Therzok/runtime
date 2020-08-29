@@ -260,10 +260,9 @@ namespace Microsoft.XmlSerializer.Generator
                     if (type != null)
                     {
                         bool isObsolete = false;
-                        object[] obsoleteAttributes = type.GetCustomAttributes(typeof(ObsoleteAttribute), false);
-                        foreach (object attribute in obsoleteAttributes)
+                        foreach (ObsoleteAttribute attribute in type.GetCustomAttributes<ObsoleteAttribute>(false))
                         {
-                            if (((ObsoleteAttribute)attribute).IsError)
+                            if (attribute.IsError)
                             {
                                 isObsolete = true;
                                 break;
