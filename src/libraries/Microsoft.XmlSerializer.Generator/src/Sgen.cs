@@ -217,16 +217,7 @@ namespace Microsoft.XmlSerializer.Generator
                 }
                 catch (ReflectionTypeLoadException typeException)
                 {
-                    List<Type> loadedTypes = new List<Type>();
-                    foreach (Type type in typeException.Types)
-                    {
-                        if (type != null)
-                        {
-                            loadedTypes.Add(type);
-                        }
-                    }
-
-                    types = loadedTypes.ToArray();
+                    types = typeException.Types.Where(type => type != null).ToArray();
                 }
             }
             else
